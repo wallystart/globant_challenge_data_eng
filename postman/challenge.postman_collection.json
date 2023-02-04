@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "956e9ff2-c48c-4426-b741-6e0c9f9d2dce",
+		"name": "challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7085154"
+	},
+	"item": [
+		{
+			"name": "Departments",
+			"item": [
+				{
+					"name": "GET Departments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{service_url}}/department/",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"department",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Department by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{service_url}}/department/1",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"department",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Department",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"department_name\": \"New department\"\r\n}"
+						},
+						"url": {
+							"raw": "{{service_url}}/departments/",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"departments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Department",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Updated description\"\r\n}"
+						},
+						"url": {
+							"raw": "{{service_url}}/department/3",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"department",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Department",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hired Employees",
+			"item": [
+				{
+					"name": "GET Hired Employees",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{service_url}}/hired_employees/",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"hired_employees",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Hired Employee by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{service_url}}/hired_employees/1",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"hired_employees",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Hired Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"My cool product\",\r\n  \"description\": \"This is the description of my cool product!\",\r\n  \"purch_price\": 50,\r\n  \"sales_price\": 70.5\r\n}"
+						},
+						"url": {
+							"raw": "{{service_url}}/hired_employees/",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"hired_employees",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Hired Employee",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Updated description\"\r\n}"
+						},
+						"url": {
+							"raw": "{{service_url}}/hired_employees/3",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"hired_employees",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Hired Employee",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "GET Jobs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{service_url}}/jobs/",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"jobs",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Job by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{service_url}}/jobs/1",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"jobs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Job",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"My cool product\",\r\n  \"description\": \"This is the description of my cool product!\",\r\n  \"purch_price\": 50,\r\n  \"sales_price\": 70.5\r\n}"
+						},
+						"url": {
+							"raw": "{{service_url}}/jobs/",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"jobs",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Job",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Updated description\"\r\n}"
+						},
+						"url": {
+							"raw": "{{service_url}}/jobs/3",
+							"host": [
+								"{{service_url}}"
+							],
+							"path": [
+								"jobs",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Job",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "service_url",
+			"value": "http://localhost:7071",
+			"type": "string"
+		}
+	]
+}
