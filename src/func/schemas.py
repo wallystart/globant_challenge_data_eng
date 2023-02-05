@@ -44,3 +44,80 @@ class Department(DepartmentBase):
         fields = {
             "id": {"description": "Unique ID of the department "},
         }
+
+
+class HiredEmployeeBase(BaseModel):
+    """
+    HiredEmployee base schema
+    """
+    name: str
+
+    class Config:
+        fields = {
+            "name": {"description": "Department name"}
+        }
+        
+
+class HiredEmployeeCreate(HiredEmployeeBase):
+    """
+    HiredEmployee create schema
+    """
+    name: str
+
+
+class HiredEmployeePartialUpdate(HiredEmployeeBase):
+    """
+    HiredEmployee update schema
+    """
+    ...
+
+
+class HiredEmployee(HiredEmployeeBase):
+    """
+    HiredEmployee schema, database representation
+    """
+    id: int
+
+    class Config:
+        fields = {
+            "id": {"description": "Unique ID of the department "},
+        }
+
+
+class JobBase(BaseModel):
+    """
+    Job base schema
+    """
+    name: str
+
+    class Config:
+        fields = {
+            "name": {"description": "Job name"}
+        }
+        
+
+class JobCreate(JobBase):
+    """
+    Job create schema
+    """
+    name: str
+
+
+class JobPartialUpdate(JobBase):
+    """
+    HiredEmployee update schema
+    """
+    ...
+
+
+class Job(JobBase):
+    """
+    Job schema, database representation
+    """
+    id: int
+
+    class Config:
+        fields = {
+            "id": {"description": "Unique ID of the job "},
+        }
+

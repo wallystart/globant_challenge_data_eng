@@ -50,7 +50,7 @@ class DatabaseManagerBase(ABC):
         Updates a department
         Args:
             department_id (int): Department ID of the department to be updated
-            department (schemas.Department): Department to update
+            department (schemas.DepartmentPartialUpdate): Department to update
 
         Returns:
             schemas.Department: Updated department
@@ -66,6 +66,115 @@ class DatabaseManagerBase(ABC):
         """
         ...
 
+    @abstractmethod
+    def add_hired_employees(self, hired_employees: List[schemas.HiredEmployeeCreate]) -> List[schemas.HiredEmployee]:
+        """
+        Adds hired_employees to the database
+        Args:
+            department (schemas.DepartmentCreate): Department to be added
+
+        Returns:
+            schemas.Department: Inserted department
+        """
+        ...
+
+    @abstractmethod
+    def get_hired_employees(self) -> Optional[List[schemas.HiredEmployee]]:
+        """
+        Returns all hired_employees from the database
+        Returns:
+            Optional[List[schemas.HiredEmployee]]: List of hired_employees
+        """
+        ...
+
+    @abstractmethod
+    def get_hired_employee(self, id: int) -> Optional[schemas.HiredEmployee]:
+        """
+        Returns a specific hired_employee by id
+        Args:
+            id (int): Id of the hired_employee
+
+        Returns:
+            Optional[schemas.HiredEmployee]: Returns the specified hired_employee
+        """
+        ...
+
+    @abstractmethod
+    def update_hired_employee(self, hired_employee_id: int, hired_employee: schemas.HiredEmployeePartialUpdate) -> schemas.HiredEmployee:
+        """
+        Updates a hired_employee
+        Args:
+            hired_employee_id (int): Department ID of the hired_employee to be updated
+            hired_employee (schemas.HiredEmployeePartialUpdate): hired_employee to update
+
+        Returns:
+            schemas.HiredEmployee: Updated hired_employee
+        """
+        ...
+
+    @abstractmethod
+    def delete_hired_employee(self, hired_employee_id: int) -> None:
+        """
+        Deletes a hired_employee by id
+        Args:
+            id (int): Id of the to be deleted hired_employee
+        """
+        ...
+
+    @abstractmethod
+    def add_jobs(self, jobs: List[schemas.JobCreate]) -> List[schemas.Job]:
+        """
+        Adds jobs to the database
+        Args:
+            jobs (schemas.Job): Job to be added
+
+        Returns:
+            schemas.Job: Inserted job
+        """
+        ...
+
+    @abstractmethod
+    def get_jobs(self) -> Optional[List[schemas.Job]]:
+        """
+        Returns all jobs from the database
+        Returns:
+            Optional[List[schemas.Job]]: List of jobs
+        """
+        ...
+
+    @abstractmethod
+    def get_job(self, id: int) -> Optional[schemas.Job]:
+        """
+        Returns a specific job by id
+        Args:
+            id (int): Id of the job
+
+        Returns:
+            Optional[schemas.Job]: Returns the specified job
+        """
+        ...
+
+    @abstractmethod
+    def update_job(self, job_id: int, job: schemas.JobPartialUpdate) -> schemas.Job:
+        """
+        Updates a job
+        Args:
+            job_id (int): Job ID of the job to be updated
+            job (schemas.JobPartialUpdate): job to update
+
+        Returns:
+            schemas.HiredEmployee: Updated hired_employee
+        """
+        ...
+
+    @abstractmethod
+    def delete_job(self, job_id: int) -> None:
+        """
+        Deletes a job by id
+        Args:
+            id (int): Id of the to be deleted job
+        """
+        ...
 
 class FakeDataBaseManager(DatabaseManagerBase):
 
@@ -120,3 +229,7 @@ class FakeDataBaseManager(DatabaseManagerBase):
         
         if department_del:
             self._departments.remove(department_del)
+
+
+class PostgresDataBaseManager(DatabaseManagerBase):
+    ...
