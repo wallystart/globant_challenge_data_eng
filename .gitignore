@@ -1,1 +1,9 @@
 src/func/.venv/*
+src/func/__pycache__/crud.cpython-39.pyc
+src/func/__pycache__/database.cpython-39.pyc
+src/func/__pycache__/dependencies.cpython-39.pyc
+src/func/__pycache__/models.cpython-39.pyc
+src/func/__pycache__/schemas.cpython-39.pyc
+src/func/routers/__pycache__/departments.cpython-39.pyc
+src/func/routers/__pycache__/hired_employees.cpython-39.pyc
+src/func/routers/__pycache__/jobs.cpython-39.pyc

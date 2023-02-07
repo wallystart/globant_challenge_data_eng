@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 import azure.functions as func
 
-from routers import departments 
+from routers import departments, hired_employees, jobs
 from utilities.exceptions import ApiException
 
 
@@ -31,6 +31,8 @@ app = FastAPI(
     }
 )
 app.include_router(departments.router)
+app.include_router(hired_employees.router)
+app.include_router(jobs.router)
 # Add additional api routers here
 
 

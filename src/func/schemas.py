@@ -8,116 +8,82 @@ Pydantic allows to create versatile domain models and ensures data integrity and
 """
 
 
-class DepartmentBase(BaseModel):
+class Department(BaseModel):
     """
-    Department base schema
+    Department schema
     """
     name: str
 
     class Config:
+        orm_mode = True
+
         fields = {
             "name": {"description": "Department name"}
         }
-        
 
-class DepartmentCreate(DepartmentBase):
+class DepartmentWithIdentifier(Department):
     """
-    Department create schema
-    """
-    name: str
-
-
-class DepartmentPartialUpdate(DepartmentBase):
-    """
-    Department update schema
-    """
-    ...
-
-
-class Department(DepartmentBase):
-    """
-    Department schema, database representation
+    GenericIdentifier schema
     """
     id: int
 
     class Config:
+        orm_mode = True
+
         fields = {
-            "id": {"description": "Unique ID of the department "},
+            "id": {"description": "GenericIdentifier value"}
         }
 
 
-class HiredEmployeeBase(BaseModel):
+class HiredEmployee(BaseModel):
     """
-    HiredEmployee base schema
+    HiredEmployees schema
     """
     name: str
 
     class Config:
+        orm_mode = True
+
         fields = {
-            "name": {"description": "Department name"}
+            "name": {"description": "HiredEmployees name"}
         }
-        
 
-class HiredEmployeeCreate(HiredEmployeeBase):
+class HiredEmployeeWithIdentifier(HiredEmployee):
     """
-    HiredEmployee create schema
-    """
-    name: str
-
-
-class HiredEmployeePartialUpdate(HiredEmployeeBase):
-    """
-    HiredEmployee update schema
-    """
-    ...
-
-
-class HiredEmployee(HiredEmployeeBase):
-    """
-    HiredEmployee schema, database representation
+    GenericIdentifier schema
     """
     id: int
 
     class Config:
+        orm_mode = True
+
         fields = {
-            "id": {"description": "Unique ID of the department "},
+            "id": {"description": "GenericIdentifier value"}
         }
 
 
-class JobBase(BaseModel):
+class Job(BaseModel):
     """
-    Job base schema
+    Job schema
     """
     name: str
 
     class Config:
+        orm_mode = True
+
         fields = {
             "name": {"description": "Job name"}
         }
-        
 
-class JobCreate(JobBase):
+class JobWithIdentifier(Job):
     """
-    Job create schema
-    """
-    name: str
-
-
-class JobPartialUpdate(JobBase):
-    """
-    HiredEmployee update schema
-    """
-    ...
-
-
-class Job(JobBase):
-    """
-    Job schema, database representation
+    Job schema
     """
     id: int
 
     class Config:
-        fields = {
-            "id": {"description": "Unique ID of the job "},
-        }
+        orm_mode = True
 
+        fields = {
+            "id": {"description": "Job value"}
+        }

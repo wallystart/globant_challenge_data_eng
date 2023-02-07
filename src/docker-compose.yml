@@ -1,0 +1,30 @@
+version: '3.5'
+
+
+services:
+  db:
+    container_name: postgres_database
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: globant_super_admin
+      POSTGRES_PASSWORD: pass1234
+      POSTGRES_DB: globant_challenge_db
+      PGDATA: /data/postgres
+    volumes:
+       - postgres-db:/data/postgres
+       # copy the sql script to create tables
+       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  postgres-db:
+    driver: local
+  
