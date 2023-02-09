@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends
 from typing import Optional, List
 
 from dependencies import get_db
+from sqlalchemy.exc import IntegrityError
 from utilities.exceptions import EntityNotFoundException, ApiException
 import schemas
 import crud
@@ -81,4 +82,11 @@ async def update_hired_employee(hired_employee_id: int, hired_employee_update: s
 @router.delete("/{hired_employee_id}", summary="Deletes a hired_employee", description="Deletes a hired_employee permanently by ID")
 async def hired_employee_product(hired_employee_id: int, db = Depends(get_db)):
     logging.debug("Product: Delete department")
-    crud.delete_hired_employee(db, hired_employee_id)
+    try:
+        hired_employee = crud.delete_hired_employee(db, hired_employee_id)
+    except IntegrityError as err:
+        raise EntityNotFoundException(code="Unable to delete hired employee, integrity error", 
+                                      description=str(err))
+    if not hired_employee:
+        raise EntityNotFoundException(code="Unable to delete hired employee", 
+                                      description=f"Hired employee with the id {hired_employee_id} does not exist")

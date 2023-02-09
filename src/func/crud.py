@@ -49,7 +49,7 @@ def get_hired_employees(db: Session, id: int = None) -> Union[Optional[List[sche
     result = db.query(models.HiredEmployees).filter(models.HiredEmployees.id == id).first() if id else db.query(models.HiredEmployees).all()
     return result
 
-def update_hired_employee(db: Session, id: int, hired_employee: schemas.HiredEmployee) -> Optional[schemas.HiredEmployee]:
+def update_hired_employee(db: Session, id: int, hired_employee: schemas.HiredEmployee) -> Optional[schemas.HiredEmployeeWithIdentifier]:
     _hired_employee = get_hired_employees(db, id)
     if _hired_employee:
         for key, value in hired_employee.dict().items():

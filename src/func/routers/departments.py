@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends
 from typing import Optional, List
 
 from dependencies import get_db
+from sqlalchemy.exc import IntegrityError
 from utilities.exceptions import EntityNotFoundException, ApiException
 import schemas
 import crud
@@ -81,7 +82,11 @@ async def update_department(department_id: int, department_update: schemas.Depar
 @router.delete("/{department_id}", summary="Deletes a department", description="Deletes a department permanently by ID")
 async def department_product(department_id: int, db = Depends(get_db)):
     logging.debug("Product: Delete department")
-    department = crud.delete_department(db, department_id)
+    try:
+        department = crud.delete_department(db, department_id)
+    except IntegrityError as err:
+        raise EntityNotFoundException(code="Unable to delete department, integrity error", 
+                                      description=str(err))
     if not department:
-        raise EntityNotFoundException(code="Unable to update department", 
+        raise EntityNotFoundException(code="Unable to delete department", 
                                       description=f"Department with the id {department_id} does not exist")

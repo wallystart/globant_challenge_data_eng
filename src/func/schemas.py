@@ -12,13 +12,13 @@ class Department(BaseModel):
     """
     Department schema
     """
-    name: str
+    department: Optional[str] = None
 
     class Config:
         orm_mode = True
 
         fields = {
-            "name": {"description": "Department name"}
+            "department": {"description": "Department name"}
         }
 
 class DepartmentWithIdentifier(Department):
@@ -39,13 +39,19 @@ class HiredEmployee(BaseModel):
     """
     HiredEmployees schema
     """
-    name: str
+    name: Optional[str] = None
+    datetime: Optional[str] = None
+    department_id: Optional[int] = None
+    job_id: Optional[int] = None
 
     class Config:
         orm_mode = True
 
         fields = {
-            "name": {"description": "HiredEmployees name"}
+            "name": {"description": "HiredEmployees name"},
+            "datetime": {"description": "Hire datetime in ISO format"},
+            "department_id": {"description": "Id of department"},
+            "job_id": {"description": "Id of Job"}
         }
 
 class HiredEmployeeWithIdentifier(HiredEmployee):
@@ -66,13 +72,13 @@ class Job(BaseModel):
     """
     Job schema
     """
-    name: str
+    job: Optional[str] = None
 
     class Config:
         orm_mode = True
 
         fields = {
-            "name": {"description": "Job name"}
+            "job": {"description": "Job name"}
         }
 
 class JobWithIdentifier(Job):

@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends
 from typing import Optional, List
 
 from dependencies import get_db
+from sqlalchemy.exc import IntegrityError
 from utilities.exceptions import EntityNotFoundException, ApiException
 import schemas
 import crud
@@ -81,4 +82,11 @@ async def update_job(job_id: int, job_update: schemas.Job, db = Depends(get_db))
 @router.delete("/{job_id}", summary="Deletes a job", description="Deletes a job permanently by ID")
 async def job_product(job_id: int, db = Depends(get_db)):
     logging.debug("Jobs: Delete job")
-    crud.delete_job(db, job_id)
+    try:
+        job = crud.delete_job(db, job_id)
+    except IntegrityError as err:
+        raise EntityNotFoundException(code="Unable to delete job, integrity error", 
+                                      description=str(err))
+    if not job:
+        raise EntityNotFoundException(code="Unable to delete job", 
+                                      description=f"Job with the id {job_id} does not exist")
