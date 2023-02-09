@@ -8,39 +8,88 @@ Pydantic allows to create versatile domain models and ensures data integrity and
 """
 
 
-class DepartmentBase(BaseModel):
+class Department(BaseModel):
     """
-    Department base schema
+    Department schema
     """
-    name: str
+    department: Optional[str] = None
 
     class Config:
+        orm_mode = True
+
         fields = {
-            "name": {"description": "Department name"}
+            "department": {"description": "Department name"}
         }
-        
 
-class DepartmentCreate(DepartmentBase):
+class DepartmentWithIdentifier(Department):
     """
-    Department create schema
-    """
-    name: str
-
-
-class DepartmentPartialUpdate(DepartmentBase):
-    """
-    Department update schema
-    """
-    ...
-
-
-class Department(DepartmentBase):
-    """
-    Department schema, database representation
+    GenericIdentifier schema
     """
     id: int
 
     class Config:
+        orm_mode = True
+
         fields = {
-            "id": {"description": "Unique ID of the department "},
+            "id": {"description": "GenericIdentifier value"}
+        }
+
+
+class HiredEmployee(BaseModel):
+    """
+    HiredEmployees schema
+    """
+    name: Optional[str] = None
+    datetime: Optional[str] = None
+    department_id: Optional[int] = None
+    job_id: Optional[int] = None
+
+    class Config:
+        orm_mode = True
+
+        fields = {
+            "name": {"description": "HiredEmployees name"},
+            "datetime": {"description": "Hire datetime in ISO format"},
+            "department_id": {"description": "Id of department"},
+            "job_id": {"description": "Id of Job"}
+        }
+
+class HiredEmployeeWithIdentifier(HiredEmployee):
+    """
+    GenericIdentifier schema
+    """
+    id: int
+
+    class Config:
+        orm_mode = True
+
+        fields = {
+            "id": {"description": "GenericIdentifier value"}
+        }
+
+
+class Job(BaseModel):
+    """
+    Job schema
+    """
+    job: Optional[str] = None
+
+    class Config:
+        orm_mode = True
+
+        fields = {
+            "job": {"description": "Job name"}
+        }
+
+class JobWithIdentifier(Job):
+    """
+    Job schema
+    """
+    id: int
+
+    class Config:
+        orm_mode = True
+
+        fields = {
+            "id": {"description": "Job value"}
         }
