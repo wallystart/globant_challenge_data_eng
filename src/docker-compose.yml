@@ -13,11 +13,18 @@ services:
       - ./spark-apps:/opt/workspace/spark-apps
       - ./data:/opt/workspace/data
       - ./notebooks:/opt/workspace/notebooks
+    environment:
+      - POSTGRES_CONN_STR=${POSTGRES_CONN_STR}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
   
   api_az_function:
     image: api_az_function
     ports:
       - 7071:80
+    environment:
+      - POSTGRES_CONN_STR=${POSTGRES_CONN_STR}
   
   spark-master:
     image: cluster-apache-spark:3.0.2
@@ -32,6 +39,7 @@ services:
     environment:
       - SPARK_LOCAL_IP=spark-master
       - SPARK_WORKLOAD=master
+      - POSTGRES_CONN_STR=${POSTGRES_CONN_STR}
   spark-worker-a:
     image: cluster-apache-spark:3.0.2
     ports:
@@ -41,12 +49,13 @@ services:
       - spark-master
     environment:
       - SPARK_MASTER=spark://spark-master:7077
-      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=1G
       - SPARK_DRIVER_MEMORY=1G
       - SPARK_EXECUTOR_MEMORY=1G
       - SPARK_WORKLOAD=worker
       - SPARK_LOCAL_IP=spark-worker-a
+      - POSTGRES_CONN_STR=${POSTGRES_CONN_STR}
     volumes:
       - shared-workspace:/opt/workspace
       - ./spark-apps:/opt/workspace/spark-apps
@@ -61,12 +70,13 @@ services:
       - spark-master
     environment:
       - SPARK_MASTER=spark://spark-master:7077
-      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=1G
       - SPARK_DRIVER_MEMORY=1G
       - SPARK_EXECUTOR_MEMORY=1G
       - SPARK_WORKLOAD=worker
       - SPARK_LOCAL_IP=spark-worker-b
+      - POSTGRES_CONN_STR=${POSTGRES_CONN_STR}
     volumes:
       - shared-workspace:/opt/workspace
       - ./spark-apps:/opt/workspace/spark-apps
@@ -78,9 +88,9 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_USER: globant_super_admin
-      POSTGRES_PASSWORD: pass1234
-      POSTGRES_DB: globant_challenge_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
       PGDATA: /data/postgres
     volumes:
       - postgres-db:/data/postgres
